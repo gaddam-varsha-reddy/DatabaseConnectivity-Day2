@@ -1,60 +1,71 @@
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Scanner;
 
 public  class InMemoryStorageUserManager implements UserManager{
-    Scanner sc = new Scanner(System.in);
-    ArrayList<User> list = new ArrayList<>();
-    int n;
+    private List<User> list = new ArrayList<>();
+    private int n;
+    private User user;
+
     @Override
     public void addUser(User user) {
         list.add(user);
-        //System.out.println("added");
+        System.out.println(user.getFirstName()+" is added to list");
     }
     @Override
-    public ArrayList<User> listUsers() {
-        //System.out.println("list users");
+    public List<User> listUsers() {
        return list;
     }
 
     @Override
-    public void deleteUser(String s) {
-        Iterator itr = list.iterator();
-        while (itr.hasNext()) {
-            User x = (User) itr.next();
-            if (x.getFname().equals(s)){
-                itr.remove();
-                //System.out.println("Removed");
+    public void deleteUser(String firstName) {
+        Iterator userListIterator = list.iterator();
+        boolean flag=true;
+        while (userListIterator.hasNext()) {
+            User user = (User) userListIterator.next();
+            if (user.getFirstName().equals(firstName)){
+                userListIterator.remove();
+                System.out.println(user.getFirstName()+" is removed from list");
+                flag=false;
                 break;
             }
+        }
+        if(flag){
+            System.out.println(firstName+"is not in list");
         }
     }
 
     @Override
-    public ArrayList<User> searchUsers(String searchWord) {
-       ArrayList<User> matchlist =new ArrayList<>();
-        for (User i : list) {
-            if (i.getFname().equals(searchWord)) {
-                //users.remove(Integer.valueOf(n));
-                //System.out.println("name found");
-                matchlist.add(i);
+    public ArrayList<User> searchUsers(String firstName) {
+        boolean flag=true;
+       ArrayList<User> watchlist =new ArrayList<>();
+        for (User listItem : list) {
+            if (listItem.getFirstName().equals(firstName)) {
+                System.out.println(listItem.getFirstName()+" is found in list");
+                watchlist.add(listItem);
+                flag=false;
             }
         }
-        return matchlist;
+        if(flag){
+            System.out.println(firstName + " is not in list");
+        }
+        return watchlist;
     }
     @Override
     public void updateUser(User user){
-        for (User i : list) {
-            if(i.getFname().equals(user.getFname())){
-                i.setLname(user.getLname());
-                i.setCompanyName(user.getCompanyName());
-                //System.out.println("updated");
+        boolean flag=true;
+        for (User listItem : list) {
+            if (listItem.getFirstName().equals(user.getFirstName())) {
+                listItem.setLastName(user.getLastName());
+                listItem.setCompanyName(user.getCompanyName());
+                System.out.println(user.getFirstName() + " is updated in list");
+                flag=false;
+                break;
             }
-            /*
-            else{
-                System.out.println("User not found");
-            }*/
         }
+            if(flag){
+                System.out.println(user.getFirstName() +" is not found in list");
+            }
+
     }
 }

@@ -1,46 +1,30 @@
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Objects;
-import java.util.Scanner;
 
 public class User {
-    private String fname;
-    private String lname;
+    private String firstName;
+    private String lastName;
     private String companyName;
 
-    User(String fname,String lname,String companyName){
-        this.fname=fname;
-        this.lname=lname;
+    public User(String firstName,String lastName,String companyName) {
+        this.firstName = firstName;
+        this.lastName=lastName;
         this.companyName=companyName;
-
-    }
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return fname.equals(user.fname) && lname.equals(user.lname) && companyName.equals(user.companyName);
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(fname, lname, companyName);
+    public String getFirstName() {
+        return firstName;
     }
 
-    public String getFname() {
-        return fname;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public void setFname(String fname) {
-        this.fname = fname;
+    public String getLastName() {
+        return lastName;
     }
 
-    public String getLname() {
-        return lname;
-    }
-
-    public void setLname(String lname) {
-        this.lname = lname;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getCompanyName() {
@@ -51,4 +35,16 @@ public class User {
         this.companyName = companyName;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && Objects.equals(companyName, user.companyName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(firstName, lastName, companyName);
+    }
 }

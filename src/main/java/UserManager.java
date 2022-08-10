@@ -10,7 +10,7 @@ public interface UserManager {
 
     void deleteUser(String s);
 
-    List<User> searchUsers(String searchWord);
+    List<User> searchUsers(String firstName);
 
     void updateUser(User user);
 }
